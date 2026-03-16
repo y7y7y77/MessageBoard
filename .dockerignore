@@ -1,0 +1,23 @@
+# 忽略无需打包进镜像的目录和文件
+.git
+.idea
+.gitignore
+.gitattributes
+*.md
+.env
+.env.*
+
+# 前端构建缓存（Docker 内重新构建）
+vue-web/node_modules
+vue-web/dist
+
+# 后端构建缓存
+api/target
+
+# Docker 自身文件
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# CI/CD
+.github

@@ -1,0 +1,39 @@
+services:
+
+  # ── 数据库容器 ──────────────────────────────────────────────────
+  db:
+    image: mysql:8.0
+    container_name: msgboard-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: message_board
+      MYSQL_CHARACTER_SET_SERVER: utf8mb4
+      MYSQL_COLLATION_SERVER: utf8mb4_unicode_ci
+    volumes:
+      - db-data:/var/lib/mysql              # 持久化数据
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro  # 首次启动建表
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 40s
+
+  # ── 应用容器（前端 + 后端合一）─────────────────────────────────
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: msgboard-app
+    restart: unless-stopped
+    ports:
+      - "8089:8081"        # 云服务器 80 端口 → 容器 8081 端口（可改为 "8081:8081"）
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      db:
+        condition: service_healthy   # 等待数据库健康后再启动
+
+volumes:
+  db-data:   # MySQL 数据持久化卷
