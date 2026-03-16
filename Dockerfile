@@ -33,7 +33,7 @@ COPY api/src/ ./src/
 COPY --from=build-frontend /app/vue-web/dist/ ./src/main/resources/static/
 
 # 打包（-Dspring-boot.repackage.skip=false 覆盖 pom.xml 中的 skip=true，生成可执行 fat JAR）
-RUN mvn package -DskipTests -Dspring-boot.repackage.skip=false -B -q
+RUN mvn package -DskipTests -B -q
 
 
 # ─────────────────────────────────────────────────────────────────

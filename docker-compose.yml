@@ -23,7 +23,7 @@ services:
   # ── 应用容器（前端 + 后端合一）─────────────────────────────────
   app:
     # 直接使用 GitHub Actions 推送到阿里云 ACR 的镜像，服务器无需 Dockerfile
-    image: ${ALIYUN_IMAGE}
+    image: crpi-rl603f46y0u1n0zb.cn-shanghai.personal.cr.aliyuncs.com/yu7/messageboard:latest
     container_name: msgboard-app
     restart: unless-stopped
     ports:
