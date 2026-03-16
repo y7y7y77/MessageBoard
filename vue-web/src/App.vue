@@ -32,6 +32,12 @@ import WeatherWidget from '@/compoents/WeatherWidget.vue'
   </div>
 </template>
 
+<style>
+/* 全局重置 */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; }
+</style>
+
 <style scoped>
 .app-header {
   background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 50%, #1565c0 100%);
