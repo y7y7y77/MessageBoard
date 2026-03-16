@@ -27,7 +27,7 @@ services:
     container_name: msgboard-app
     restart: unless-stopped
     ports:
-      - "8089:8081"        # 云服务器 80 端口 → 容器 8081 端口（可改为 "8081:8081"）
+      - "8100:8081"        # 云服务器 80 端口 → 容器 8081 端口（可改为 "8081:8081"）
     environment:
       SPRING_PROFILES_ACTIVE: docker
     depends_on:
