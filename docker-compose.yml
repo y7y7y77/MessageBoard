@@ -22,9 +22,8 @@ services:
 
   # ── 应用容器（前端 + 后端合一）─────────────────────────────────
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    # 直接使用 GitHub Actions 推送到阿里云 ACR 的镜像，服务器无需 Dockerfile
+    image: ${ALIYUN_IMAGE}
     container_name: msgboard-app
     restart: unless-stopped
     ports:
